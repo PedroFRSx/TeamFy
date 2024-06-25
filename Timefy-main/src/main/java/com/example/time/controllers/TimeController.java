@@ -1,36 +1,37 @@
-package com.example.time.controllers;
+    package com.example.time.controllers;
 
-import com.example.time.models.Time;
-import com.example.time.services.TimeService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+    import com.example.time.models.Time;
+    import com.example.time.services.TimeService;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+    import java.util.List;
 
-@RestController
-@RequestMapping("/api/times")
-public class TimeController {
+    @RestController
+    @RequestMapping("/api/times")
+      // Permite apenas esta origem específica
+    public class TimeController {
 
-    private final TimeService timeService;
+        private final TimeService timeService;
 
-    public TimeController(TimeService timeService) {
-        this.timeService = timeService;
-    }
-    @GetMapping
-    public ResponseEntity findAll() {
-        return ResponseEntity.ok(timeService.findAll());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity findById (@PathVariable Long id) {
-        try {
-            Time time = timeService.findById(id);
-            return ResponseEntity.ok(time);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        public TimeController(TimeService timeService) {
+            this.timeService = timeService;
         }
-    }
+        @GetMapping
+        public ResponseEntity findAll() {
+            return ResponseEntity.ok(timeService.findAll());
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity findById (@PathVariable Long id) {
+            try {
+                Time time = timeService.findById(id);
+                return ResponseEntity.ok(time);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        }
 
     @PostMapping
     public ResponseEntity save(@RequestBody Time time) {

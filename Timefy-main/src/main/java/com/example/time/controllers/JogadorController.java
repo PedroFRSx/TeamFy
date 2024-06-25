@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/jogadores")
+// Permite apenas esta origem específica
 public class JogadorController {
 
     private final JogadorService jogadorService;
